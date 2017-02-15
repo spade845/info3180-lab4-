@@ -13,6 +13,18 @@ from werkzeug.utils import secure_filename
 ###
 # Routing for your application.
 ###
+@app.route('/filelisting')
+def filelisting():
+    if not session.get('logged_in'):
+        abort(401)
+    import os 
+    rootdir = os.getcwd() 
+    print rootdir 
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'): 
+        for file in files: 
+            print os.path.join(subdir, file) 
+        return 
+
 
 @app.route('/')
 def home():
